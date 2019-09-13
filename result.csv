@@ -1,0 +1,3 @@
+CVE-2013-4312,net/unix/af_unix.c,static void unix_destruct_scm(struct sk_buff *skb),net/unix/af_unix.c,static int unix_attach_fds(struct scm_cookie *scm, struct sk_buff *skb),net/unix/af_unix.c,static int unix_attach_fds(struct scm_cookie *scm, struct sk_buff *skb),net/unix/garbage.c,void unix_inflight(struct file *fp),net/unix/garbage.c,void unix_inflight(struct file *fp),
+CVE-2013-7446,net/unix/af_unix.c,static void unix_release_sock(struct sock *sk, int embrion),net/unix/af_unix.c,static struct sock *unix_create1(struct net *net, struct socket *sock, int kern),
+CVE-2014-9892,sound/core/compress_offload.c,snd_compr_set_metadata(struct snd_compr_stream *stream, unsigned long arg),
