@@ -38,8 +38,8 @@ do
         #done
 
         #echo -n "$line," >> $outputfile
-        path=""
         #grep -r -P '@@|\+\+\+ b'  $dir  | grep -P ' @@ [a-zA-Z0-9\*\s_]+\([a-zA-Z0-9\*\s_,]+\)|\+\+\+ [\S]+' -o |  awk '{gsub(/^\s@@\s/, "");print}' | while read str
+        path=""
         grep -r -P '@@|\+\+\+ b'  $dir/*patch  | grep -P ' [0-9a-zA-Z_\*]+[\s]?\(|\+\+\+ [\S]+' -o | awk '{gsub(/^\s+\*|\($/, "");print}'  |while read str
         do
             if [[ "$str" =~ ^\+\+\+.* ]]; then            
