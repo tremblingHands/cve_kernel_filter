@@ -53,12 +53,28 @@ def numMatch(str1, str2, op):
 debug = False
 # debug = True
 
+def cmp(T1, T2):
+    P1 = T1[:]
+    P2 = T2[:]
+    while len(T1) < len(T2):
+        T1.append('0')
+    while len(T2) < len(T1):
+        T2.append('0')
+    if T1 == T2:
+        print(P1)
+        print(P2)
+    return T1 == T2
+
+
 def versionIsMatch(target, relationship, version):
     targetTokens = re.split("\D+", target)
     versionTokens = re.split("\D+", version)
 
     # 发现 <= 之前都是 = 
-    return targetTokens == versionTokens
+    #return targetTokens == versionTokens
+    if version == "*" or version == "-":
+        return False
+    return cmp(targetTokens, versionTokens)
 
     if debug:
         print(target)
@@ -169,33 +185,33 @@ targetSoftware = [
 #        "ever_found":"",
 #        "count":0,
 #    }
-    {
-        "name":"linux_kernel",
-        "version":"2.6.0",
-        "ever_found":"",
-        "count":0,
-    },
-    {
-        "name":"linux_kernel",
-        "version":"3.4.0",
-        "ever_found":"",
-        "count":0,
-    },
-    {
-        "name":"linux_kernel",
-        "version":"3.10.0",
-        "ever_found":"",
-        "count":0,
-    },
+#    {
+#        "name":"linux_kernel",
+#        "version":"2.6.0",
+#        "ever_found":"",
+#        "count":0,
+#    },
+#    {
+#        "name":"linux_kernel",
+#        "version":"3.4.0",
+#        "ever_found":"",
+#        "count":0,
+#    },
+#    {
+#        "name":"linux_kernel",
+#        "version":"3.10.0",
+#        "ever_found":"",
+#        "count":0,
+#    },
+#    {
+#        "name":"linux_kernel",
+#        "version":"4.1.0",
+#        "ever_found":"",
+#        "count":0,
+#    },
     {
         "name":"linux_kernel",
         "version":"4.1.0",
-        "ever_found":"",
-        "count":0,
-    },
-    {
-        "name":"linux_kernel",
-        "version":"4.1.9",
         "ever_found":"",
         "count":0,
     }
@@ -223,7 +239,6 @@ with open("./output.csv", 'w') as csvOutputFile:
                                     if debug:
                                         print("-----------------------------year:"+str(year)+"  "+product["product_name"]+" "+id)
                                     if versionIsMatch(targetSoftware[i]["version"], version["version_affected"], version["version_value"]):
-                                        targetSoftware[i]["count"] += 1
                                         cweType = cve["cve"]["problemtype"]["problemtype_data"][0]["description"][0]["value"]
                                         version = "3"
                                         if not version in cve["impact"]:
@@ -249,6 +264,7 @@ with open("./output.csv", 'w') as csvOutputFile:
                                             continue
                                         #for name in funcNames:
                                         #    funcStr = funcStr + name + ",  "
+                                        targetSoftware[i]["count"] += 1
                                         writer.writerow([id])
                                         # print(targetSoftware[i]["name"]+"\t"+id+"\t"+targetSoftware[i]["version"]+"\t"+version["version_affected"]+"\t"+version["version_value"])
 
@@ -258,3 +274,4 @@ for i in range(0, len(targetSoftware)):
         print(targetSoftware[i]["name"]+" not ever found")
     else:
         print(targetSoftware[i]["name"] + " : " + targetSoftware[i]["version"] + " found " + str(targetSoftware[i]["count"]))
+
