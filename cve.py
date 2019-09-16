@@ -56,6 +56,10 @@ debug = False
 def versionIsMatch(target, relationship, version):
     targetTokens = re.split("\D+", target)
     versionTokens = re.split("\D+", version)
+
+    # 发现 <= 之前都是 = 
+    return targetTokens == versionTokens
+
     if debug:
         print(target)
         print(version)
@@ -165,33 +169,33 @@ targetSoftware = [
 #        "ever_found":"",
 #        "count":0,
 #    }
-#    {
-#        "name":"linux_kernel",
-#        "version":"2.6.0",
-#        "ever_found":"",
-#        "count":0,
-#    },
-#    {
-#        "name":"linux_kernel",
-#        "version":"3.4.0",
-#        "ever_found":"",
-#        "count":0,
-#    },
-#    {
-#        "name":"linux_kernel",
-#        "version":"3.10.0",
-#        "ever_found":"",
-#        "count":0,
-#    },
-#    {
-#        "name":"linux_kernel",
-#        "version":"4.1.0",
-#        "ever_found":"",
-#        "count":0,
-#    },
+    {
+        "name":"linux_kernel",
+        "version":"2.6.0",
+        "ever_found":"",
+        "count":0,
+    },
+    {
+        "name":"linux_kernel",
+        "version":"3.4.0",
+        "ever_found":"",
+        "count":0,
+    },
+    {
+        "name":"linux_kernel",
+        "version":"3.10.0",
+        "ever_found":"",
+        "count":0,
+    },
     {
         "name":"linux_kernel",
         "version":"4.1.0",
+        "ever_found":"",
+        "count":0,
+    },
+    {
+        "name":"linux_kernel",
+        "version":"4.1.9",
         "ever_found":"",
         "count":0,
     }
