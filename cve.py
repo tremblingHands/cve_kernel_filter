@@ -2,6 +2,8 @@
 import json
 import re
 import csv
+import sys
+
 
 def filterDriver(description):
     m = re.findall(r'driver', description, re.IGNORECASE)
@@ -60,9 +62,9 @@ def cmp(T1, T2):
         T1.append('0')
     while len(T2) < len(T1):
         T2.append('0')
-    if T1 == T2:
-        print(P1)
-        print(P2)
+#    if T1 == T2:
+#        print(P1)
+#        print(P2)
     return T1 == T2
 
 
@@ -238,6 +240,8 @@ with open("./output.csv", 'w') as csvOutputFile:
                                 for version in product["version"]["version_data"]:
                                     if debug:
                                         print("-----------------------------year:"+str(year)+"  "+product["product_name"]+" "+id)
+                                    if len(sys.argv) > 1:
+                                        targetSoftware[i]["version"] = sys.argv[1]
                                     if versionIsMatch(targetSoftware[i]["version"], version["version_affected"], version["version_value"]):
                                         cweType = cve["cve"]["problemtype"]["problemtype_data"][0]["description"][0]["value"]
                                         version = "3"
